@@ -1,0 +1,19 @@
+{
+    "name": "beNiceGoose",
+    "version": "1.0.1",
+    "description": "Mongoose back-end assignment",
+    "main": "index.js",
+    "license": "None",
+    "scripts": {
+      "start": "node index",
+      "dev": "nodemon index",
+      "seed": "node utils/seed"
+    },
+    "dependencies": {
+      "express": "^4.17.1",
+      "mongoose": "^6.9.2"
+    },
+    "devDependencies": {
+      "nodemon": "^2.0.9"
+    }
+  }
