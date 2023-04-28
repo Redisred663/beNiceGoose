@@ -28,18 +28,6 @@ const thoughtSchema = new Schema(
     }
 )
 
-reactionCount
-.virtual('reactions')
-// the getter
-.get(function () {
-    return `${this.reactions}`;
-})
-// the setter
-.set(function (v) {
-    const reactions = v.split(' ')[0];
-    this.set({ reactions });
-});
-
 // Initialize
 const Thought = model('thought', thoughtSchema);
 

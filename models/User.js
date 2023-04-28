@@ -2,6 +2,10 @@ const { Schema, model } = require('mongoose');
 
 const userSchema = new Schema(
     {
+        _id: {
+            type: String,
+            required: true,
+        },
         username: {
             type: String,
             required: true,
@@ -12,7 +16,6 @@ const userSchema = new Schema(
             type: String,
             required: true,
             unique: true,
-            validate: [validateEmail, 'Please fill a valid email address'],
             match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'],
         },
         thoughts: [{
@@ -32,17 +35,6 @@ const userSchema = new Schema(
     }
 )
 
-friendCount
-    .virtual('friends')
-    //   A getter, following three different activity models
-    .get(function () {
-        return `${this.friends}`;
-    })
-    //   A setter, I don't fully understand this part
-    .set(function (v) {
-        const friends = v.split(' ')[0];
-        this.set({ friends });
-    });
 
 // Initializing the model
 const User = model('user', userSchema);

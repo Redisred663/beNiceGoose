@@ -17,17 +17,24 @@ module.exports = {
   },
 
   getSingleUser(req, res) {
-    User.findOne({ _id: req.params.id })
+    const { id } = req.params;
+  
+    if (!id) {
+      return res.status(400).json({ message: 'Missing user ID' });
+    }
+  
+    User.findById(id)
       .select('-__v')
       .then((user) => {
+        console.log(user)
         if (!user) {
-          return res.status(404).json({ message: 'No user with that ID' });
+          return res.status(404).json({ message: 'User not found' });
         }
         return res.json({ user });
       })
-      .catch((err) => {
-        console.log(err);
-        return res.status(500).json(err);
+      .catch((error) => {
+        console.error(error);
+        return res.status(500).json({ message: 'Server error' });
       });
   },
 
